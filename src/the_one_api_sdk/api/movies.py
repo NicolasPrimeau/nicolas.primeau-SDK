@@ -38,5 +38,5 @@ class MoviesRequest:
     def __call__(self, movie_id: str) -> MovieRequest:
         return MovieRequest(self.config, movie_id)
 
-    def list(self) -> MovieListRequest:
-        return MovieListRequest(self.config)
+    def list(self, **kwargs) -> MovieListRequest:
+        return MovieListRequest(self.config, **kwargs)

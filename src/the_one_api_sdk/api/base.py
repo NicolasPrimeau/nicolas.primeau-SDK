@@ -55,9 +55,12 @@ class ResourceRequest(BaseResourceRequest, abc.ABC):
 
 
 class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
-    def __init__(self, config: SdkConfig, limit: int = None, offset: int = None, page: int = None):
+    def __init__(
+            self, config: SdkConfig, limit: int = None, page_size: int = None, offset: int = None, page: int = None
+    ):
         super().__init__(config)
         self.limit = limit
+        self.page_size = page_size
         self.offset = offset
         self.page = page
 
@@ -73,8 +76,8 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
 
     def get_request(self) -> Request:
         request = super().get_request()
-        if self.limit:
-            request.query_params["limit"] = self.limit
+        if self.page_size:
+            request.query_params["limit"] = self.page_size
 
         if self.offset:
             request.query_params["offset"] = self.offset
@@ -88,12 +91,22 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
         page = self.page or 1
         request = self.get_request()
         entries = None
+        num_returned = 0
 
-        while entries is None or entries:
-            request.query_params["page"] = self.page
+        def _has_reached_limit():
+            return self.limit is not None and num_returned >= self.limit
+
+        while entries is None or entries and not _has_reached_limit():
+            request.query_params["page"] = page
+
             response = self.config.client.get_response(request)
             entries = response.to_json().get("docs", [])
-            yield from entries
+
+            for item in entries:
+                yield item
+                num_returned += 1
+                if _has_reached_limit():
+                    return
             page += 1
 
     def stream(self) -> Iterable[T]:

@@ -18,8 +18,8 @@ class QuoteRequest(ResourceRequest):
 
 
 class QuoteListRequest(ResourceListRequest[base.Quote]):
-    def __init__(self, config: SdkConfig, movie_id: str = None):
-        super().__init__(config)
+    def __init__(self, config: SdkConfig, movie_id: str = None, **kwargs):
+        super().__init__(config, **kwargs)
         self._movie_id = movie_id
 
     @property

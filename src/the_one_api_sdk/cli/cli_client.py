@@ -27,6 +27,7 @@ def get_client_args():
         required=False
     )
     parser.add_argument("-q", "--quote-id", help="Quote ID", dest="quote_id", required=False)
+    parser.add_argument("-l", "--limit", help="Number of items to retrieve", dest="limit", type=int, required=False)
     return parser.parse_args()
 
 
@@ -45,7 +46,7 @@ def main():
 def handle_movie_command(args):
     match args.subcommand:
         case "list":
-            for movie in sdk.TheOneApiSdk().movies.list():
+            for movie in sdk.TheOneApiSdk().movies.list(limit=args.limit):
                 pprint.pprint(movie)
         case "get":
             if not args.movie_id:
@@ -58,11 +59,8 @@ def handle_movie_command(args):
 def handle_quotes_command(args):
     match args.subcommand:
         case "list":
-            cnt = 0
-            for quote in sdk.TheOneApiSdk().quotes.list(movie_id=args.movie_id):
-                cnt += 1
+            for quote in sdk.TheOneApiSdk().quotes.list(movie_id=args.movie_id, limit=args.limit):
                 pprint.pprint(quote)
-            print(cnt)
         case "get":
             if not args.quote_id:
                 raise InvalidCommand("Quote ID must be specified")
