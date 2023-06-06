@@ -1,0 +1,4 @@
+.idea
+TheOneApiSDK.egg-info/
+*.pyc
+build
