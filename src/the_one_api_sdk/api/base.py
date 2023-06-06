@@ -84,7 +84,18 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
 
         return request
 
+    def _iterate_entries(self):
+        page = self.page or 1
+        request = self.get_request()
+        entries = None
+
+        while entries is None or entries:
+            request.add_query_param("page", page)
+            response = self.config.client.get_response(request)
+            entries = response.to_json().get("docs", [])
+            yield from entries
+            page += 1
+
     def stream(self) -> Iterable[T]:
-        response = self.get_response()
         adapter = self.adapter
-        return map(adapter.convert_to_resource, response.to_json().get("docs", []))
+        return map(adapter.convert_to_resource, self._iterate_entries())

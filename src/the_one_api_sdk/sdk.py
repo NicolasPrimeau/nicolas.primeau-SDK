@@ -1,4 +1,4 @@
-from the_one_api_sdk.resources import quotes, movies
+from the_one_api_sdk.api import quotes, movies
 from the_one_api_sdk.config import SdkConfig
 
 

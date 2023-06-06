@@ -1,9 +1,10 @@
-from the_one_api_sdk import request
-from the_one_api_sdk.resources import adapters, quotes, base
+from the_one_api_sdk.api.base import ResourceListRequest, ResourceRequest
+from the_one_api_sdk.api import quotes
+from the_one_api_sdk.resources import adapters, base
 from the_one_api_sdk.config import SdkConfig
 
 
-class MovieListRequest(request.ResourceListRequest[base.Movie]):
+class MovieListRequest(ResourceListRequest[base.Movie]):
     @property
     def path(self) -> str:
         return "movie"
@@ -13,7 +14,7 @@ class MovieListRequest(request.ResourceListRequest[base.Movie]):
         return adapters.MovieResponseAdapter()
 
 
-class MovieRequest(request.ResourceRequest):
+class MovieRequest(ResourceRequest):
     def __init__(self, config: SdkConfig, movie_id: str):
         super().__init__(config)
         self.movie_id = movie_id

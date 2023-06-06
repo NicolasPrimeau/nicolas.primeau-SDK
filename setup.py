@@ -16,5 +16,9 @@ setup(
     ],
     packages=setuptools.find_packages(where="./src"),
     package_dir={'the_one_api_sdk': 'src/the_one_api_sdk'},
-    scripts=list(map(str, _SCRIPT_PATH.glob("[a-zA-Z]*.py")))
+    entry_points={
+        'console_scripts': [
+            'the-one-api-sdk = the_one_api_sdk.cli.cli_client:main'
+        ]
+    },
 )

@@ -1,6 +1,6 @@
 import dataclasses
 import json
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 
 from the_one_api_sdk import utils
 
@@ -16,11 +16,11 @@ class Request:
     path: str
     method: str
     headers: Optional[Dict[str, str]] = dataclasses.field(default_factory=dict)
-    query_params: Optional[Dict[str, str]] = dataclasses.field(default_factory=dict)
+    query_params: Optional[Dict[str, Any]] = dataclasses.field(default_factory=dict)
     body: Optional[str] = None
 
     def add_query_param(self, key: str, value):
-        self.query_params[key] = str(value)
+        self.query_params[key] = value
 
     @property
     def full_url(self) -> str:

@@ -1,9 +1,9 @@
-from the_one_api_sdk import request
+from the_one_api_sdk.api.base import ResourceListRequest, ResourceRequest
 from the_one_api_sdk.resources import base, adapters
 from the_one_api_sdk.config import SdkConfig
 
 
-class QuoteRequest(request.ResourceRequest):
+class QuoteRequest(ResourceRequest):
     def __init__(self, config: SdkConfig, quote_id: str):
         super().__init__(config)
         self._quote_id = quote_id
@@ -17,7 +17,7 @@ class QuoteRequest(request.ResourceRequest):
         return adapters.QuoteResponseAdapter()
 
 
-class QuoteListRequest(request.ResourceListRequest[base.Quote]):
+class QuoteListRequest(ResourceListRequest[base.Quote]):
     def __init__(self, config: SdkConfig, movie_id: str = None):
         super().__init__(config)
         self._movie_id = movie_id
