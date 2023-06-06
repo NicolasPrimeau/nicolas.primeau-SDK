@@ -14,6 +14,7 @@ setup(
     install_requires=[
         'requests>=2.31.0',
     ],
+    download_url="https://github.com/Nixon-/nicolas.primeau-SDK/archive/refs/tags/1.0.0.tar.gz",
     packages=setuptools.find_packages(where="./src"),
     package_dir={'the_one_api_sdk': 'src/the_one_api_sdk'},
     entry_points={
