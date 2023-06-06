@@ -21,4 +21,5 @@ setup(
             'the-one-api-sdk = the_one_api_sdk.cli.cli_client:main'
         ]
     },
+    license='MIT'
 )
