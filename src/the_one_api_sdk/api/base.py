@@ -74,13 +74,13 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
     def get_request(self) -> Request:
         request = super().get_request()
         if self.limit:
-            request.add_query_param("limit", self.limit)
+            request.query_params["limit"] = self.limit
 
         if self.offset:
-            request.add_query_param("offset", self.offset)
+            request.query_params["offset"] = self.offset
 
         if self.page:
-            request.add_query_param("page", self.page)
+            request.query_params["page"] = self.page
 
         return request
 
@@ -90,7 +90,7 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
         entries = None
 
         while entries is None or entries:
-            request.add_query_param("page", page)
+            request.query_params["page"] = self.page
             response = self.config.client.get_response(request)
             entries = response.to_json().get("docs", [])
             yield from entries

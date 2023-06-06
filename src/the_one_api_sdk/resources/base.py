@@ -10,12 +10,12 @@ class Resource:
 class Movie(Resource):
     movie_id: str
     name: str
-    runtimeInMinutes: str
-    budgetInMillions: int
-    boxOfficeRevenueInMillions: int
-    academyAwardNominations: int
-    academyAwardWins: int
-    rottenTomatoesScore: int
+    runtimeInMinutes: Optional[int] = None
+    budgetInMillions: Optional[int] = None
+    boxOfficeRevenueInMillions: Optional[int] = None
+    academyAwardNominations: Optional[int] = None
+    academyAwardWins: Optional[int] = None
+    rottenTomatoesScore: Optional[int] = None
 
 
 @dataclasses.dataclass

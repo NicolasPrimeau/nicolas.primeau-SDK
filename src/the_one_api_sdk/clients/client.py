@@ -25,7 +25,6 @@ class RequestsClient(Client):
             params=request.query_params,
             data=request.body
         )
-        print(requests_response.url)
         response = base.Response(
             request=request,
             headers=dict(requests_response.headers),

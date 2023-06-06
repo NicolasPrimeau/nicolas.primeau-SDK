@@ -13,8 +13,8 @@ class HttpMethods(utils.StrEnum):
 @dataclasses.dataclass
 class Request:
     url: str
-    path: str
     method: str
+    path: Optional[str] = None
     headers: Optional[Dict[str, str]] = dataclasses.field(default_factory=dict)
     query_params: Optional[Dict[str, Any]] = dataclasses.field(default_factory=dict)
     body: Optional[str] = None
@@ -24,7 +24,7 @@ class Request:
 
     @property
     def full_url(self) -> str:
-        return f"{self.url.rstrip('/')}/{self.path.lstrip('/')}"
+        return f"{self.url.rstrip('/')}/{self.path.lstrip('/')}" if self.path else self.url
 
 
 @dataclasses.dataclass
