@@ -87,6 +87,10 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
 
         return request
 
+    def stream(self) -> Iterable[T]:
+        adapter = self.adapter
+        return map(adapter.convert_to_resource, self._iterate_entries())
+
     def _iterate_entries(self):
         page = self.page or 1
         request = self.get_request()
@@ -109,7 +113,3 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
                     return
 
             page += 1
-
-    def stream(self) -> Iterable[T]:
-        adapter = self.adapter
-        return map(adapter.convert_to_resource, self._iterate_entries())
