@@ -1,7 +1,7 @@
 import argparse
 import pprint
 
-from the_one_api_sdk import sdk
+from the_one_api_sdk import components
 
 
 class UnknownCommand(Exception):
@@ -46,12 +46,12 @@ def main():
 def handle_movie_command(args):
     match args.subcommand:
         case "list":
-            for movie in sdk.TheOneApiSdk().movies.list(limit=args.limit):
+            for movie in components.TheOneApiSdk().movies.list(limit=args.limit):
                 pprint.pprint(movie)
         case "get":
             if not args.movie_id:
                 raise InvalidCommand("Movie ID must be specified")
-            pprint.pprint(sdk.TheOneApiSdk().movies(args.movie_id).fetch())
+            pprint.pprint(components.TheOneApiSdk().movies(args.movie_id).fetch())
         case _:
             raise UnknownCommand(args.subcommand)
 
@@ -59,11 +59,11 @@ def handle_movie_command(args):
 def handle_quotes_command(args):
     match args.subcommand:
         case "list":
-            for quote in sdk.TheOneApiSdk().quotes.list(movie_id=args.movie_id, limit=args.limit):
+            for quote in components.TheOneApiSdk().quotes.list(movie_id=args.movie_id, limit=args.limit):
                 pprint.pprint(quote)
         case "get":
             if not args.quote_id:
                 raise InvalidCommand("Quote ID must be specified")
-            pprint.pprint(sdk.TheOneApiSdk().quotes(args.quote_id).fetch())
+            pprint.pprint(components.TheOneApiSdk().quotes(args.quote_id).fetch())
         case _:
             raise UnknownCommand(args.subcommand)

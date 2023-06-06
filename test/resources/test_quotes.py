@@ -2,8 +2,8 @@ import json
 import unittest
 
 from test import utils
-from the_one_api_sdk.api import base
-from the_one_api_sdk.api.quotes import QuoteListRequest, QuoteRequest
+from the_one_api_sdk.components import base
+from the_one_api_sdk.resources.quotes import QuoteListRequest, QuoteRequest
 from the_one_api_sdk.config import SdkConfig
 from the_one_api_sdk.resources.base import Quote
 

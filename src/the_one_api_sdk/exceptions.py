@@ -1,4 +1,4 @@
-from the_one_api_sdk.clients import base
+from the_one_api_sdk.components import base
 
 
 class TheOneApiSDKException(Exception):

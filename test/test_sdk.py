@@ -2,7 +2,7 @@ import json
 import unittest
 
 from test import utils
-from the_one_api_sdk.api import base
+from the_one_api_sdk.components import base
 from the_one_api_sdk.config import SdkConfig
 from the_one_api_sdk.resources.base import Movie, Quote
 from the_one_api_sdk.sdk import TheOneApiSdk

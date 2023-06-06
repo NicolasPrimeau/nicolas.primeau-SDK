@@ -1,6 +1,6 @@
 from typing import List
 
-from the_one_api_sdk.clients import client, base
+from the_one_api_sdk.components import client, base
 
 
 class MockClient(client.Client):

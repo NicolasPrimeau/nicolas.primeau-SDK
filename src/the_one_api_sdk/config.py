@@ -1,7 +1,7 @@
 import os
 
-from the_one_api_sdk.clients.base import Request
-from the_one_api_sdk.clients.client import Client, get_default
+from the_one_api_sdk.components.base import Request
+from the_one_api_sdk.components.client import Client, get_default
 
 
 class SdkConfig:

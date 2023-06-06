@@ -1,4 +1,4 @@
-from the_one_api_sdk.api.base import ResourceListRequest, ResourceRequest
+from the_one_api_sdk.components.requests import ResourceListRequest, ResourceRequest
 from the_one_api_sdk.resources import base, adapters
 from the_one_api_sdk.config import SdkConfig
 

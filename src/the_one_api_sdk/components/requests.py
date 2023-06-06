@@ -3,7 +3,7 @@ from typing import Optional, TypeVar, Iterable, List
 
 from the_one_api_sdk.resources import base, adapters
 
-from the_one_api_sdk.clients.base import HttpMethods, Request, Response
+from the_one_api_sdk.components.base import HttpMethods, Request, Response
 from the_one_api_sdk.config import SdkConfig
 
 
