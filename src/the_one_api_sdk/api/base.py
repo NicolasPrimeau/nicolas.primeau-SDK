@@ -96,7 +96,7 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
         def _has_reached_limit():
             return self.limit is not None and num_returned >= self.limit
 
-        while entries is None or entries and not _has_reached_limit():
+        while entries is None or entries:
             request.query_params["page"] = page
 
             response = self.config.client.get_response(request)
@@ -107,6 +107,7 @@ class ResourceListRequest(BaseResourceRequest, Iterable[T], abc.ABC):
                 num_returned += 1
                 if _has_reached_limit():
                     return
+
             page += 1
 
     def stream(self) -> Iterable[T]:
