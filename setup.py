@@ -5,8 +5,8 @@ from setuptools import setup
 
 _SCRIPT_PATH = pathlib.Path("./scripts")
 setup(
-    name='TheOneApiSDK',
-    author="Nicolas.Primeau",
+    name='nicolas-primeau-sdk',
+    author="Nicolas Primeau",
     author_email="nicolas.primeau@gmail.com",
     description="Description",
     version='1.0.0',
