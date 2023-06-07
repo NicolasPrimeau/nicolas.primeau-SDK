@@ -2,3 +2,4 @@
 TheOneApiSDK.egg-info/
 *.pyc
 build
+dist
