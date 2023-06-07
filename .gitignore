@@ -1,5 +1,5 @@
 .idea
-TheOneApiSDK.egg-info/
+*.egg-info/
 *.pyc
 build
 dist
